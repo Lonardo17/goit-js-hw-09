@@ -2,7 +2,11 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 const btn = document.querySelector("[data-start]")
-const timers = document.querySelector(".timer")
+// const timers = document.querySelector(".timer")
+const days = document.querySelector("[data-days]")
+const hours = document.querySelector("[data-hours]")
+const minutes = document.querySelector("[data-minutes]")
+const seconds = document.querySelector("[data-seconds]")
 const data = new Date().getTime();
 btn.setAttribute("disabled", true)
 let difference = 0;
@@ -32,11 +36,18 @@ function timer() {
 function step() {
     difference = fp.selectedDates[0].getTime() - new Date().getTime()
     const timeArr = convertMs(difference)
-    for (const time in timeArr) {
-        const name = document.querySelector(`[data-${time}]`)
-        const value = timeArr[time]
-        name.textContent = addLeadingZero(value)
-    }
+    informationTimer(timeArr)
+    // for (const time in timeArr) {
+    //     const name = document.querySelector(`[data-${time}]`)
+    //     const value = timeArr[time]
+    //     name.textContent = addLeadingZero(value)
+    // }
+}
+function informationTimer(el){
+    days.textContent = addLeadingZero(el.days)
+    hours.textContent = addLeadingZero(el.hours)
+    minutes.textContent = addLeadingZero(el.minutes)
+    seconds.textContent = addLeadingZero(el.seconds)
 }
 
 function addLeadingZero(value) {
